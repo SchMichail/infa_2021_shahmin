@@ -117,9 +117,9 @@ triangle_no_circle(Brown, 1135, 460, 1155, 460, 1145, 475)
 
 
 
-(x,y,fontSize) = (0,5,233)
+(x,y,fontSize) = (0,15,143)
 myFont = pg.font.SysFont("None", fontSize)
-fontImage = myFont.render("Python is Amazing", 0, "black", "green")
+fontImage = myFont.render("PYTHON is REALLY AMAZING!", 0, "black", "green")
 screen.blit(fontImage, (x,y))
 
 
