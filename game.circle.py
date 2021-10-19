@@ -22,6 +22,23 @@ g = 0
 i = 0 
 score_super = 0
 
+'''def Start():
+    ''' '''rect(screen, black, x, y, widtch, hieght)
+    (x, y, fontSize) = (500, 350, 50)
+    myFont = pygame.font.SysFont("None", fontSize)
+    fontImage = myFont.render("Start ", 0, "RED", "BLACK")
+    screen.blit(fontImage, (x,y))
+
+def run_game():
+    game = True
+    while game:
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                a = event.pos[0]
+                b = event.pos[1]
+                if a > x and a < x + 100 and a > y and a < y + 50:
+                    game = False'''
+                
 
 def new_ball():
     '''рисует новый шарик '''
@@ -44,6 +61,8 @@ def super_figure():
     '''rect(screen, color1, (x_1, y_1, 50, 50))'''
     return x_1, y_1, v_x1, v_y1, color1
     
+'''run_game()
+Start()'''
 
 pygame.display.update()
 clock = pygame.time.Clock()
