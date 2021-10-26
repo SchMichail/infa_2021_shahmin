@@ -4,8 +4,6 @@ from random import randint
 pygame.init()
 
 FPS = 30
-screen = pygame.display.set_mode((1200, 800))
-
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 0)
@@ -14,17 +12,18 @@ MAGENTA = (255, 0, 255)
 CYAN = (0, 255, 255)
 BLACK = (0, 0, 0)
 COLORS = [RED, BLUE, YELLOW, GREEN, MAGENTA, CYAN]
-height_square = 50
 score = 0
 number_circle = 4
 g = 0
 #Чиcло квадратиков на экране
 score_super = 0
-k = creen_scale = 1
+k = creen_scale = 2
+#целое число
+height_square = 25 * k
 
 def Start():
     '''Функция рисует на чёрном экране красную кнопку Start'''
-    (x, y, fontSize) = (k * 500, k * 350, k * 100)
+    (x, y, fontSize) = (k * 250, k * 175, k * 50)
     myFont = pygame.font.SysFont("None", fontSize)
     fontImage = myFont.render("Start ", 0, "RED", "BLACK")
     screen.blit(fontImage, (x,y))
@@ -43,16 +42,24 @@ def run_game(x, y):
                 b = event.pos[1]
                 print(a, b)
                 print("QWERTY === ", x, y)
-                if a > x and a < x + k * 100 and b > y and b < y + k * 100:
+                if a > x and a < x + k * 50 and b > y and b < y + k * 50:
                     #Условие попадания в кнопку страт кликом мышки
                     game = False
 
 
+def name():
+    '''Просит ввести имя игрока'''
+    (x, y, fontSize) = (k * 125, k * 175, k * 50)
+    myFont = pygame.font.SysFont("None", fontSize)
+    fontImage = myFont.render("Введите имя в файл ", 0, "RED", "BLACK")
+    screen.blit(fontImage, (x,y))
+    
+
 def new_ball():
     '''рисует новый шарик '''
-    x = x_circle = randint(k * 100, k * 1100)
-    y = y_circle = randint(k * 100, k * 680)
-    r = circle_radius = randint(10, 100)
+    x = x_circle = randint(k * 50, k * 550)
+    y = y_circle = randint(k * 50, k * 340)
+    r = circle_radius = randint(k * 5, k * 50)
     v_x = v_x_speed_circle = randint(-5,5)
     v_y = v_y_speed_circle = randint(-5,5)
     color = color_circle = COLORS[randint(0, 5)]
@@ -62,8 +69,8 @@ def new_ball():
 
 def super_figure():
     '''рисует бонусную фигуру в виде квдрата'''
-    x_1  = x_square = randint(k * 100, k * 950)
-    y_1 = y_square = randint(k * 100, k * 700)
+    x_1  = x_square = randint(k * 50, k * 475)
+    y_1 = y_square = randint(k * 50, k * 350)
     v_x1 = v_x1_square_speed = randint(-10, 10)
     v_y1 = v_y1_square_speed = randint(-10, 10)
     color1 = color_square = COLORS[randint(0,5)]
@@ -78,11 +85,11 @@ def circle_speed():
         circle(screen, A[j][3], (A[j][0], A[j][1]), A[j][2])
         if A[j][0] - A[j][2] < 0:
             A[j][4] = -1 * A[j][4]
-        if A[j][0] + A[j][2] > k * 1200:
+        if A[j][0] + A[j][2] > k * 600:
             A[j][4] = -1 * A[j][4]
         if A[j][1] - A[j][2] < 0:
             A[j][5] = -1 * A[j][5]
-        if A[j][1] + A[j][2] > k * 800:
+        if A[j][1] + A[j][2] > k * 400:
             A[j][5] = -1 * A[j][5]
         A[j][0] += A[j][4]
         A[j][1] += A[j][5]
@@ -98,25 +105,28 @@ def square_speed():
         rect(screen, B[h][4], (B[h][0], B[h][1], B[h][5], B[h][6]))
         if B[h][0] < 0:
             B[h][2] = -1 * B[h][2]
-        if B[h][0] + height_square > k * 1200:
+        if B[h][0] + height_square > k * 600:
             B[h][2] = -1 * B[h][2]
         if B[h][1] < 0:
             B[h][3] = -1 * B[h][3]
-        if B[h][1] + height_square > k * 800:
+        if B[h][1] + height_square > k * 400:
             B[h][3] = -1 * B[h][3]
         B[h][0] += B[h][2]
         B[h][1] += B[h][3]
         h += 1
                         
 
+screen = pygame.display.set_mode((k * 600, k * 400))
 pygame.display.update()
 clock = pygame.time.Clock()
 finished = False
 
 Start()
 pygame.display.update()
-run_game(k * 500, k * 350)
+run_game(k * 250, k * 175)
 print("name")
+name()
+pygame.display.update()
 name = input()
 
 j = 0
@@ -174,12 +184,12 @@ while not finished:
     
     Score = str(score + score_super)
     screen.fill(BLACK)
-    (x1, y1, x2, fontSize) = (k * 10, k * 15, k * 150, k * 50)
+    (x1, y1, x2, fontSize) = (k * 5, k * 8, k * 75, k * 25)
     myFont = pygame.font.SysFont("None", fontSize)
     fontImage = myFont.render("Score: ", 0, "RED", "BLACK")
     fontImage_score = myFont.render(Score, 0, "RED", "BLACK")
-    screen.blit(fontImage, (x1,y1))
-    screen.blit(fontImage_score, (x2,y1))
+    screen.blit(fontImage, (x1, y1))
+    screen.blit(fontImage_score, (x2, y1))
     #Данный блок реализует подсчёт очков и выводит их на экран
     
     circle_speed()
